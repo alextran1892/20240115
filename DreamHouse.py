@@ -43,7 +43,7 @@ cloud.showturtle()
 cloud.speed(100)
 ban_kinh1 = [50,60,70,80,90,100,120,130,140,150,180]
 x = 50
-for loop in range(70):
+for loop in range(100):
     a = cloud_color_list[r.randint(0,len(cloud_color_list)-1)]
     cloud.pencolor(a)
     cloud.fillcolor(a)
@@ -74,43 +74,76 @@ for k in range(9):
     pen.forward(37)
     pen.left(90)
 
+#Test sóng
+all_waves = []
+run = True
 
+y_position = [290,275,260,245,230,215,200,185,170,155,140,125,110,95,80,65,50,35,20,5,]
+for wave in range(0,20):
+    waves = turtle.Turtle(shape='turtle')
+    waves.penup()
+    waves.goto(x=-1000, y=y_position[wave])
+    waves.speed(100)
+    waves.pensize(5)
+    waves.color(wave_color_list[r.randint(0,len(wave_color_list)-1)])
+    all_waves.append(waves)
 
-#Sóng biển
-wave = turtle.Turtle()
-wave.shape('turtle')
-wave.hideturtle()
-wave.pensize(5)
-wave.speed(10000000)
-wave.penup()
-
-y = 290
-for k in range(20):
-
-    wave.goto(-1000,y)
-    wave.penup()
-    #Hiển thị hình ảnh rùa
-    wave.showturtle()
-
-
-#T.color(danh_sach_mau[T.random.randint(0, len(danh_sach_mau) - 1)])
+def draw_wave(waves):
     for i in range(50):
+        global run
+        for wave in waves:
+            #Cài đặt màu ngẫu nhiên cho mỗi bước 
+            wave.pencolor(wave_color_list[r.randint(0,len(wave_color_list)-1)])
+            down = r.randint(10,40)
+            up = r.randint(10,40)
+            wave.pendown()
+            #Rùa tiến lên phía trước với giá trị ngẫu nhiên có để lại nét vẽ
+            wave.circle(down/2,90)
+            wave.circle(-down/2,-90)
+            wave.right(180)
+            wave.penup()
+            #Rùa tiến về phía trước với giá trị ngầu nhiên không để lại nét vẽ
+            wave.forward(up)
+        if wave.xcor() > 1000:
+            run = False
+while run:
+    draw_wave(all_waves)
 
-        #Set màu ngẫu nhiên cho sóng
-        wave.pencolor(wave_color_list[r.randint(0,len(wave_color_list)-1)])
-        #sinh hai giá trị ngầu nhiên
-        down = r.randint(10,40)
-        up = r.randint(10,40)
-        wave.pendown()
-        #Rùa tiến lên phía trước với giá trị ngẫu nhiên có để lại nét vẽ
+# #Sóng biển
+# wave = turtle.Turtle()
+# wave.shape('turtle')
+# wave.hideturtle()
+# wave.pensize(5)
+# wave.speed(10000000)
+# wave.penup()
 
-        wave.circle(down/2,90)
-        wave.circle(-down/2,-90)
-        wave.right(180)
-        wave.penup()
-        #Rùa tiến về phía trước với giá trị ngầu nhiên không để lại nét vẽ
-        wave.forward(up)
-    y-=15   
+# y = 290
+# for k in range(20):
+
+#     wave.goto(-1000,y)
+#     wave.penup()
+#     #Hiển thị hình ảnh rùa
+#     wave.showturtle()
+
+
+# #T.color(danh_sach_mau[T.random.randint(0, len(danh_sach_mau) - 1)])
+#     for i in range(50):
+
+#         #Set màu ngẫu nhiên cho sóng
+#         wave.pencolor(wave_color_list[r.randint(0,len(wave_color_list)-1)])
+#         #sinh hai giá trị ngầu nhiên
+#         down = r.randint(10,40)
+#         up = r.randint(10,40)
+#         wave.pendown()
+#         #Rùa tiến lên phía trước với giá trị ngẫu nhiên có để lại nét vẽ
+
+#         wave.circle(down/2,90)
+#         wave.circle(-down/2,-90)
+#         wave.right(180)
+#         wave.penup()
+#         #Rùa tiến về phía trước với giá trị ngầu nhiên không để lại nét vẽ
+#         wave.forward(up)
+#     y-=15   
 
 #mặt trời
 sun_color_list = ['#FFF3E0','#FFE0B2','#FFCC80','#FFB74D','#FFA726','#FF9800','#FB8000','#F57000','#EF6C00','#E65100']
